@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@meronex/icons": "^4.0.0",
+    "axios": "^0.21.1",
     "localforage": "^1.9.0",
     "polotno": "^0.24.3",
     "react": "^17.0.2",
@@ -46,7 +47,7 @@
   "homepage": ".",
   "scripts": {
     "ppostinstall": "electron-builder install-app-deps",
-    "start": "react-scripts start",
+    "start": "set PORT=3006 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"electron .\"",

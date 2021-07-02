@@ -1,16 +1,21 @@
-import React from 'react';
-import Toolbar from 'polotno/toolbar/toolbar';
-import ZoomButtons from 'polotno/toolbar/zoom-buttons';
-import SidePanel from 'polotno/side-panel/side-panel';
-import Workspace from 'polotno/canvas/workspace';
+import React from "react";
+import Toolbar from "polotno/toolbar/toolbar";
+import ZoomButtons from "polotno/toolbar/zoom-buttons";
+import SidePanel from "polotno/side-panel/side-panel";
+import Workspace from "polotno/canvas/workspace";
+import Topbar from "./topbar";
+import { loadJSONFile } from "./file";
 
-import Topbar from './topbar';
-import { loadJSONFile } from './file';
+import { DEFAULT_SECTIONS } from "polotno/side-panel";
+import { TemplatesSection } from "./componants/TemplatesPanel";
+import { СustomPhotos } from "./componants/СustomPhotos";
+const sections = [TemplatesSection, СustomPhotos, ...DEFAULT_SECTIONS];
 
 const App = ({ store }) => {
+  console.log(store);
   return (
     <div
-      style={{ width: '100vw', height: '100vh' }}
+      style={{ width: "100vw", height: "100vh" }}
       onDrop={(ev) => {
         // Prevent default behavior (Prevent file from being opened)
         ev.preventDefault();
@@ -19,7 +24,7 @@ const App = ({ store }) => {
           // Use DataTransferItemList interface to access the file(s)
           for (let i = 0; i < ev.dataTransfer.items.length; i++) {
             // If dropped items aren't files, reject them
-            if (ev.dataTransfer.items[i].kind === 'file') {
+            if (ev.dataTransfer.items[i].kind === "file") {
               const file = ev.dataTransfer.items[i].getAsFile();
               loadJSONFile(file, store);
             }
@@ -35,23 +40,27 @@ const App = ({ store }) => {
       <Topbar store={store} />
       <div
         style={{
-          display: 'flex',
-          height: 'calc(100% - 50px)',
-          width: '100%',
-          backgroundColor: '#30404d',
+          display: "flex",
+          height: "calc(100% - 50px)",
+          width: "100%",
+          backgroundColor: "#30404d",
         }}
       >
-        <div style={{ width: '400px', height: '100%', display: 'flex' }}>
-          <SidePanel store={store} />
+        <div style={{ width: "400px", height: "100%", display: "flex" }}>
+          <SidePanel
+            store={store}
+            sections={sections}
+            defaultSection="templates"
+          />
         </div>
         <div
           style={{
-            display: 'flex',
-            height: '100%',
-            margin: 'auto',
+            display: "flex",
+            height: "100%",
+            margin: "auto",
             flex: 1,
-            flexDirection: 'column',
-            position: 'relative',
+            flexDirection: "column",
+            position: "relative",
           }}
         >
           <Toolbar store={store} />
