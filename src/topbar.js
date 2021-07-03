@@ -104,7 +104,7 @@ export default observer(({ store }) => {
       <Navbar.Group align={Alignment.RIGHT}>
         <Divider />
         <DownloadButton store={store} />
-        <NavbarHeading>White board stadio</NavbarHeading>
+        <NavbarHeading>WHITEBOARD Studio</NavbarHeading>
       </Navbar.Group>
     </Navbar>
   );
