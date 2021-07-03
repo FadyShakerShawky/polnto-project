@@ -10,7 +10,7 @@
 *.provisionprofile
 
 # production
-/build
+
 /dist
 
 # misc
